@@ -6,7 +6,7 @@ output:
   rmdformats::readthedown:
     toc: 3
     highlight: tango
-    css: "https://amandadperez.github.io/DVCPsych214/CSS/style.css"
+    css: "https://amandadperez.github.io/Publications/CSS/style.css"
 ---
 
 ## Abstract 
