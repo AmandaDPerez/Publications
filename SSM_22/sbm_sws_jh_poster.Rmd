@@ -1,0 +1,118 @@
+---
+title: "R Lab 7 Key"
+author: "Professor Perez"
+output:
+  rmdformats::readthedown:
+    toc: 3
+    highlight: tango
+    css: "https://amandadperez.github.io/DVCPsych214/CSS/style.css"
+---
+
+## Setting Up 
+
+For this week, you will be selecting a dataset and running some data exploration. For this key, I will use the `palmerpenguins` dataset to complete the exercises. My advice to you: complete this lab before completing the milestone 1. The assignments build off of one another and it makes most sense to complete this lab first. 
+
+### Libraries
+
+```{r load-pkg, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(psych)
+library(viridis)
+library(palmerpenguins)
+```
+
+### Data: Pick a dataset
+
+On Canvas, there is a folder with available datasets to pick for the final project. Spend some time going through them and select one that you want to work on this semester. 
+
+### EXERCISE 1: Load in Data
+
+In the code chunk below, load in your .csv dataset. Then, use `glimpse()` to take a peek.
+
+```{r}
+glimpse(penguins)
+```
+
+## Descriptive Statistics
+
+### EXERCISE 2: Pick 6 variables to explore
+
+Identify 6 variables from the dataset. At a minimum, you will need to have at least two numeric variables. Other than that requirement, the variables can be a mix of numeric and/or categorical variables.
+
+**Numeric Variables:** For your numeric variables, use the `describe()` function from the `psych` library.
+
+**Categogorical Variables:** For your categorical variables, use the `table()` function to get a frequency table.
+
+```{r}
+describe(penguins$body_mass_g)
+describe(penguins$flipper_length_mm)
+describe(penguins$bill_length_mm)
+table(penguins$species)
+table(penguins$island)
+table(penguins$sex)
+```
+
+## Graphing
+
+### EXERCISE 3: Plot Distributions
+
+For this exercise, you will be making 6 different graphs. Each graph will show the distribution of each of your 6 variables individually. After you make each plot, write a sentence about anything you see visually. Is it normally distributed? Do you see skew or outliers?
+
+For numeric variables you will use `geom_histogram()` and for categorical variables you will use `geom_bar()`. You do not have to clean up the labels or add a theme unless you would like to.
+
+```{r, warning = F, message = F}
+ggplot(penguins, aes(body_mass_g)) +
+  geom_histogram()
+```
+
+```{r, warning = F, message = F}
+ggplot(penguins, aes(flipper_length_mm)) +
+  geom_histogram()
+```
+
+```{r, warning = F, message = F}
+ggplot(penguins, aes(bill_length_mm)) +
+  geom_histogram()
+```
+
+```{r, warning = F, message = F}
+ggplot(penguins, aes(sex)) +
+  geom_bar()
+```
+
+```{r, warning = F, message = F}
+ggplot(penguins, aes(species)) +
+  geom_bar()
+```
+
+```{r, warning = F, message = F}
+ggplot(penguins, aes(island)) +
+  geom_bar()
+```
+
+
+### EXERCISE 4: Create 2 visualizations
+
+For this exercise you are tasked with creating two graphs that use all of your variables. If you are only using 2 numeric variables, then you must split them up such  that numeric variable #1 will be in graph 1 and numeric variable #2 will be in graph 2. This is to make sure you are able to create plots we have talked about that require at least one numeric varible (scatterplots, bar graphs, etc.). For each graph make sure you clean up the labels, add a theme, and add a title.
+
+```{r, warning = F, message = F}
+ggplot(penguins, aes(bill_length_mm, flipper_length_mm, color = island)) +
+  geom_point() +
+  theme_minimal() +
+  labs(x = "Bill Length", y = "Flipper Length", title = " Flipper x Bill Length", color = "Island")
+```
+
+```{r, warning = F, message = F}
+ggplot(penguins %>% filter(!is.na(sex)), aes(sex, body_mass_g, fill = species)) +
+  stat_summary(fun = "mean", geom = "bar", position = "dodge") +
+  theme_minimal() +
+  scale_fill_viridis_d(option = "mako") +
+  labs(x = "Penguin Sex", y = "Body Mass", title = "Body Mass by Sex x Species", fill = "Species")
+```
+
+
+### EXERCISE 5: Visualization Interpretation 
+
+
+In the space below, write several sentences interpreting what you learned from the two graphs you made in exercise 4.

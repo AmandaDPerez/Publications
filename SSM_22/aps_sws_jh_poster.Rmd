@@ -1,0 +1,47 @@
+---
+title: "COPING WITH RACISM - 'Is Superwoman Schema the Female Version of John Henryism?'"
+subtitle: "APS 2022"
+author: "Drs. Amanda D. Perez, Suzanne M. Dufault, Erica C. Spears, David H. Chae, Cheryl Woods-Giscombe, Amani M. Allen"
+output:
+  rmdformats::readthedown:
+    toc: 3
+    highlight: tango
+    css: "https://amandadperez.github.io/DVCPsych214/CSS/style.css"
+---
+
+## Abstract 
+
+xyz
+
+## Introduction
+
+## Current Study
+
+## Design
+
+## Sample Characteristics
+
+## Results: How distinguishable are SWS & John Henryism?
+
+### Correlation
+
+### Exploratory Factor Analysis
+
+### Cluster Analyses
+
+#### PCA 
+
+#### K-Modes
+
+## Results: Do SWS & John Henryism differentially predict health outcomes?
+
+## Conclusion
+
+## Contact
+
+## Acknowledgments
+
+## References
+
+
+
