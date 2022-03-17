@@ -1,19 +1,35 @@
 ---
 title: "COPING WITH RACISM - 'Is Superwoman Schema the Female Version of John Henryism?'"
-subtitle: "APS 2022"
+subtitle: "APS Poster 2022"
 author: "Drs. Amanda D. Perez, Suzanne M. Dufault, Erica C. Spears, David H. Chae, Cheryl Woods-Giscombe, Amani M. Allen"
 output:
   rmdformats::readthedown:
-    toc: 3
+    toc: 5
     highlight: tango
     css: "https://amandadperez.github.io/Publications/CSS/style.css"
 ---
 
 ## Abstract 
 
-xyz
+*Rationale*  
+John Henryism and Superwoman Schema (SWS) are dispositional characteristics adopted to overcome the challenges of chronic psychosocial stress, and have particular salience for African American women. Both show protective and harmful effects on health and share conceptual similarities and distinctions, yet there is no empirical evidence of the potential overlap resulting in uncertainty about the unique roles they may each play in relation to the health of African American women. 
 
-## Introduction
+*Objective*  
+ We examined:  
+ 1) Whether and to what extent John Henryism and SWS represent similar or distinct constructs relevant to the unique sociohistorical and sociopolitical position of African American women  
+ 2) Whether the two differentially predict health outcomes
+
+*Method*  
+Data are from a purposive and socioeconomically diverse sample of 208 African American women in the San Francisco Bay Area. First, we conducted a progressive series of tests to systematically examine the conceptual and empirical overlap between John Henryism and SWS: correlation analysis, exploratory factory analysis (EFA), principal component analysis and k-modes cluster analysis. Next, we used multivariable regression to examine associations with psychological distress and hypertension. 
+
+*Results*  
+John Henryism and SWS were moderately correlated with one another (r’s=0.30-0.48). In both EFA and cluster analyses, John Henryism items were distinct from SWS subscale items.  For SWS, feeling an obligation to present an image of strength and an obligation to help others predicted higher odds of hypertension (p<.05); having an intense motivation to succeed predicted lower odds (p=0.04). John Henryism did not predict hypertension. Feeling an obligation to help others and an obligation to suppress emotions predicted lower levels of psychological distress (p<.05) whereas John Henryism predicted higher distress (p=0.002). 
+
+*Conclusions*  
+We discuss the implications of these findings for the measurement of culturally specific phenomena and their role in contributing to the unequal burden of ill health among African American women.
+
+**Keywords: Superwoman Schema; John Henryism; Racism; African American; Stress; Coping**
+
 
 ## Current Study
 
@@ -30,6 +46,98 @@ xyz
 ### Cluster Analyses
 
 #### PCA 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE)
+
+# Packages
+library(tidyverse)
+library(psych)
+library(cluster)
+library(table1)
+library(knitr)
+options(knitr.kable.NA = '')
+library(kableExtra)
+library(ggpubr)
+library(scatterplot3d)
+
+dta_aawhhs <- haven::read_dta("~/Dropbox/HEARTs/AAWHHS/Recodeddata_040516_207obs_FINAL_nomeduse.dta") 
+dta_aawhhs <- dta_aawhhs[dta_aawhhs$`_mi_m` == 0, ]
+
+# Scale items
+strength_items <- paste0("SWS", c(1:4,29,35))
+emotion_items <- paste0("SWS", c(5:10, 30))
+vulnerable_items <- paste0("SWS", c(11:16,31))
+succeed_items <- paste0("SWS", c(17:20,32,33))
+care_items <- paste0("SWS", c(21:28,34))
+jh_items <- paste0("JH_", 1:12)
+
+
+# Dataset for analysis
+dta_analytic <- dta_aawhhs %>% 
+  dplyr::select(Subject_Number, all_of(c(strength_items, emotion_items,
+                         vulnerable_items, succeed_items, care_items, jh_items)))
+dta_analytic_cc <- dta_analytic[complete.cases(dta_analytic),] # complete cases only
+```
+
+
+```{r, include=FALSE}
+dta_analytic_cc_sc <- scale(dta_analytic_cc, center = TRUE, scale = TRUE)
+pca1 <- stats::prcomp(t(dta_analytic_cc_sc[,-1]))
+
+dta_pca1 <- data.frame(pca1$x) %>%
+  rownames_to_column(var = "item") %>% 
+  mutate(scale = case_when(item %in% strength_items ~ "SWS strength",
+                           item %in% emotion_items ~ "SWS emotion",
+                           item %in% vulnerable_items ~ "SWS vulnerable",
+                           item %in% succeed_items ~ "SWS succeed",
+                           item %in% care_items ~ "SWS care",
+                           item %in% jh_items ~ "JH"))
+```
+
+##### 2 Dimensions
+
+```{r pca-two-dimensions}
+colorscheme <- c("#0AA4D1",
+                 "#003D58",
+                 "#F3C73E",
+                 "#EF7822",
+                 "#76C1A8",
+                 "purple")
+
+dta_pca1 %>% 
+  ggplot(aes(x = PC1, y = PC2, col = scale, pch = scale)) + 
+  geom_point(size = 2) + 
+  scale_color_manual(values = c(colorscheme)[as.factor(unique(dta_pca1$scale))]) + 
+  theme_bw() + 
+  theme(legend.title = element_blank(),
+        legend.position = "bottom",
+        axis.title = element_text(size = 12),
+        axis.text = element_text(size = 10),
+        legend.text = element_text(size = 10)) + 
+  coord_equal()
+
+```
+
+##### 3 Dimensions
+
+```{r}
+dta_pca1 <- dta_pca1 %>%
+  mutate(colrscheme = case_when(scale == "SWS strength" ~ colorscheme[5],
+                                scale == "SWS emotion" ~ colorscheme[6],
+                                scale == "SWS vulnerable" ~ colorscheme[1],
+                                scale == "SWS succeed" ~ colorscheme[2],
+                                scale == "SWS care" ~ colorscheme[3],
+                                scale == "JH" ~ colorscheme[4])) %>% 
+  arrange(scale)
+library(plotly)
+plot_ly(dta_pca1, x = ~PC1, y = ~PC2, z = ~PC3,
+        color = ~scale,
+        colors = c(colorscheme)[as.factor(unique(dta_pca1$scale))])
+```
+
 
 #### K-Modes
 
