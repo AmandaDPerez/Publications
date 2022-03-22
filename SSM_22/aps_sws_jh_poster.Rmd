@@ -9,43 +9,65 @@ output:
     css: "https://amandadperez.github.io/Publications/CSS/style.css"
 ---
 
-## Abstract 
+## Abstract
 
-*Rationale*  
-John Henryism and Superwoman Schema (SWS) are dispositional characteristics adopted to overcome the challenges of chronic psychosocial stress, and have particular salience for African American women. Both show protective and harmful effects on health and share conceptual similarities and distinctions, yet there is no empirical evidence of the potential overlap resulting in uncertainty about the unique roles they may each play in relation to the health of African American women. 
+*Rationale*\
+John Henryism and Superwoman Schema (SWS) are dispositional characteristics adopted to overcome the challenges of chronic psychosocial stress, and have particular salience for African American women. Both show protective and harmful effects on health and share conceptual similarities and distinctions, yet there is no empirical evidence of the potential overlap resulting in uncertainty about the unique roles they may each play in relation to the health of African American women.
 
-*Objective*  
- We examined:  
- 1) Whether and to what extent John Henryism and SWS represent similar or distinct constructs relevant to the unique sociohistorical and sociopolitical position of African American women  
- 2) Whether the two differentially predict health outcomes
+*Objective*\
+We examined:\
+1) Whether and to what extent John Henryism and SWS represent similar or distinct constructs relevant to the unique sociohistorical and sociopolitical position of African American women\
+2) Whether the two differentially predict health outcomes
 
-*Method*  
-Data are from a purposive and socioeconomically diverse sample of 208 African American women in the San Francisco Bay Area. First, we conducted a progressive series of tests to systematically examine the conceptual and empirical overlap between John Henryism and SWS: correlation analysis, exploratory factory analysis (EFA), principal component analysis and k-modes cluster analysis. Next, we used multivariable regression to examine associations with psychological distress and hypertension. 
+*Method*\
+Data are from a purposive and socioeconomically diverse sample of 208 African American women in the San Francisco Bay Area. First, we conducted a progressive series of tests to systematically examine the conceptual and empirical overlap between John Henryism and SWS: correlation analysis, exploratory factory analysis (EFA), principal component analysis and k-modes cluster analysis. Next, we used multivariable regression to examine associations with psychological distress and hypertension.
 
-*Results*  
-John Henryism and SWS were moderately correlated with one another (r’s=0.30-0.48). In both EFA and cluster analyses, John Henryism items were distinct from SWS subscale items.  For SWS, feeling an obligation to present an image of strength and an obligation to help others predicted higher odds of hypertension (p<.05); having an intense motivation to succeed predicted lower odds (p=0.04). John Henryism did not predict hypertension. Feeling an obligation to help others and an obligation to suppress emotions predicted lower levels of psychological distress (p<.05) whereas John Henryism predicted higher distress (p=0.002). 
+*Results*\
+John Henryism and SWS were moderately correlated with one another (r's=0.30-0.48). In both EFA and cluster analyses, John Henryism items were distinct from SWS subscale items. For SWS, feeling an obligation to present an image of strength and an obligation to help others predicted higher odds of hypertension (p\<.05); having an intense motivation to succeed predicted lower odds (p=0.04). John Henryism did not predict hypertension. Feeling an obligation to help others and an obligation to suppress emotions predicted lower levels of psychological distress (p\<.05) whereas John Henryism predicted higher distress (p=0.002).
 
-*Conclusions*  
+*Conclusions*\
 We discuss the implications of these findings for the measurement of culturally specific phenomena and their role in contributing to the unequal burden of ill health among African American women.
 
 **Keywords: Superwoman Schema; John Henryism; Racism; African American; Stress; Coping**
 
-
 ## Current Study
 
-## Design
+1.  Examine whether and to what extent SWS and John Henryism represent similar or distinct constructs\
+2.  Examine whether SWS and John Henryism differentially predict health outcomes
 
-## Sample Characteristics
+## Study Sample & Characteristics
+
+Purposive community sample of 207 African American women ages 30-50, San Francisco Bay area
+
+ 
+
++------------------------------+---------------+----------------------------+
+| **Term**                     | **n**         | **%**                      |
++==============================+===============+============================+
+| **Age (M, SD)**              | **41.72**     | **5.90**                   |
++------------------------------+---------------+----------------------------+
+| [**\<**]{.ul} **HS Diploma** | **69**        | **33.33**                  |
++------------------------------+---------------+----------------------------+
+| **Not Employed**             | **93**        | **44.93**                  |
++------------------------------+---------------+----------------------------+
+| **Not Married**              | **146**       | **70.53**                  |
++------------------------------+---------------+----------------------------+
+| **Taking CV Meds**           | **43**        | **20.77**                  |
++------------------------------+---------------+----------------------------+
 
 ## Results: How distinguishable are SWS & John Henryism?
 
 ### Correlation
 
+Correlation analyses revealed moderate associations between John Henryism and two of the SWS subscales: SWS-Strength and SWS-Succeed (r=0.48 and 0.30, respectively; p\<0.001 ). John Henryism was also positively associated with psychological distress (r=0.24, p \<0.001). Three of the SWS subscales were negatively associated with psychological distress (SWS-Help: r=-0.31, p\<0.001; SWS-Vuln: r=-0.22, p \<0.01; SWS-Emosupp: r=-0.26, p\<0.001).
+
 ### Exploratory Factor Analysis
+
+John Henryism showed a mostly clean separation from SWS, loading fully on itself with the exception of items 7, 12, (which did not load at all) and item 11 (which cross-loaded lower on the "obligation to suppress emotions" factor). Those items are: (7) "Very seldom have I been disappointed by the results of my hard work", (11) "I don't let my personal feelings get in the way of doing a job", (12) "Hard work has really helped me to get ahead in life".
 
 ### Cluster Analyses
 
-#### PCA 
+#### PCA
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
@@ -81,7 +103,6 @@ dta_analytic <- dta_aawhhs %>%
                          vulnerable_items, succeed_items, care_items, jh_items)))
 dta_analytic_cc <- dta_analytic[complete.cases(dta_analytic),] # complete cases only
 ```
-
 
 ```{r, include=FALSE}
 dta_analytic_cc_sc <- scale(dta_analytic_cc, center = TRUE, scale = TRUE)
@@ -138,18 +159,60 @@ plot_ly(dta_pca1, x = ~PC1, y = ~PC2, z = ~PC3,
         colors = c(colorscheme)[as.factor(unique(dta_pca1$scale))])
 ```
 
-
 #### K-Modes
+
+In 99% of 1,000 random runs of the algorithm, John Henryism items clustered together and were cleanly separated from the SWS items which clustered within their subscales.
 
 ## Results: Do SWS & John Henryism differentially predict health outcomes?
 
+ 
+
++--------------------+---------------------------------------+---------------------------------+
+| **Term**           | **Psychological Distress (b, SE, p)** | **Hypertension (OR, 95%CI, p)** |
++====================+=======================================+=================================+
+| **John Henryism**  | **0.19, 0.06, .002\*\***              | 0.98, [0.93, 1.03], 0.51        |
++--------------------+---------------------------------------+---------------------------------+
+| **SWS-Emosupp**    | **-0.22, 0.10, 0.02\***               | 1.04, [0.96, 1.14], 0.33        |
++--------------------+---------------------------------------+---------------------------------+
+| **SWS-Strength**   | -0.10, 0.12, 0.44                     | **1.14, [1.01, 1.27], 0.03\***  |
++--------------------+---------------------------------------+---------------------------------+
+| **SWS-Succeed**    | 0.13, 0.14, 0.34                      | **0.87, [0.76, 0.99], 0.04\***  |
++--------------------+---------------------------------------+---------------------------------+
+| **SWS-Vuln**       | -0.05, 0.11, 0.67                     | 0.95, [0.85, 1.05], 0.36        |
++--------------------+---------------------------------------+---------------------------------+
+| **SWS-Help**       | **-0.16, 0.08, 0.03\***               | **1.09, [1.02, 1.18], 0.01\***  |
++--------------------+---------------------------------------+---------------------------------+
+
 ## Conclusion
+
+-   SWS is not the female John Henryism
+
+-   Both are pertinent to the stress experience/response system but they are two distinct coping dispositions for racism related stress 
 
 ## Contact
 
+Dr. Amanda D. Perez: ADP\@Berkeley.edu
+
 ## Acknowledgments
+
+UC Berkeley Institute for the Study of Societal Issues, UC Berkeley Population Center, UC Berkeley Research Bridging Grant.
 
 ## References
 
+Allen, A.M., Thomas, M. D., Michaels, E. K., Reeves, A. N., Okoye, U., Price, M. M., Hasson, R. E., Syme, S. L., & Chae, D. H. (2019). Racial discrimination, educational attainment, and biological dysregulation among midlife African American women. Psychoneuroendocrinology, 99, 225--235. <https://doi.org/10.1016/j.psyneuen.2018.09.001>
 
+Allen, A.M., Wang, Y., Chae, D. H. , Price, M. M., Powell, W., Steed, T. C., Rose Black, A., Dhabhar, F. S., Marquez‐Magaña, L., & Anonymous, (2019). Racial discrimination, the Superwoman schema, and allostatic load: Exploring an integrative stress‐coping model among african american women. Annals of the New York Academy of Sciences, 1457(1), 104--127. <https://doi.org/10.1111/nyas.14188>
 
+James, S. A., Hartnett, S. A., & Kalsbeek, W. D. (1983). John Henryism and blood pressure differences among Black Men. Journal of Behavioral Medicine, 6(3), 259--278. <https://doi.org/10.1007/bf01315113>
+
+James, S. A., Keenan, N. L., Strogatz, D. S., Browning, S. R., & Garrett, J. M. (1992). Socioeconomic status, John Henryism, and blood pressure in black adults. The Pitt County Study. American journal of epidemiology, 135(1), 59--67. <https://doi.org/10.1093/oxfordjournals.aje.a116202>\
+\
+Nuru-Jeter, A., Dominguez, T. P., Hammond, W. P., Leu, J., Skaff, M., Egerter, S., Jones, C. P., & Braveman, P. (2009). "It's the skin you're in": African-American women talk about their experiences of racism. an exploratory study to develop measures of racism for birth outcome studies. Maternal and child health journal, 13(1), 29--39. <https://doi.org/10.1007/s10995-008-0357-x>
+
+Watson, N. N., & Hunter, C. D. (2016). "I had to be strong": tensions in the strong Black woman schema. Journal of Black Psychology, 42(5), 424--452. <https://doi.org/10.1177/0095798415597093>
+
+Williams, D., & Lawler, K. A. (2001). Stress and illness in low-income women: The roles of hardiness, John Henryism, and Race. Women & Health, 32(4), 61--75. <https://doi.org/10.1300/j013v32n04_04>
+
+Woods-Giscombe, C.L. (2010). Superwoman schema: African American Women's views on stress, strength, and health. Qualitative Health Research, 20(5), 668--683. <https://doi.org/10.1177/1049732310361892>
+
+Woods-Giscombe, C.L., Allen, A.M., Black, A. R., Steed, T. C., Li, Y., & Lackey, C. (2019). The Giscombe Superwoman schema questionnaire: Psychometric Properties and associations with mental health and health behaviors in African American women. Issues in Mental Health Nursing, 40(8), 672--681. <https://doi.org/10.1080/01612840.2019.1584654> 
